@@ -1,0 +1,33 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //JSP(Java Server Page)도 템플릿 엔진이기 때문에 사용하기 위해서는 별도의 라이브러리가 필요. (JSP를 지원하는 대표 엔진=apache의 tomcat)
+    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+    // 스프링 부트는 Spring MVC, REST 및 Tomcat을 기본 임베디드 서버로 사용
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // JdbcTemplate 등 JDBC 연동에 필요한 기능을 제공한다
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    // DB 커넥션풀 기능을 제공한다
+    implementation group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '8.5.32'
+    // MySQL 연결에 필요한 JDBC 드라이버를 제공한다
+    implementation 'mysql:mysql-connector-java'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
