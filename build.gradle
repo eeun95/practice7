@@ -23,6 +23,8 @@ dependencies {
     implementation group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '8.5.32'
     // MySQL 연결에 필요한 JDBC 드라이버를 제공한다
     implementation 'mysql:mysql-connector-java'
+    // jstl 사용
+    implementation 'javax.servlet:jstl'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

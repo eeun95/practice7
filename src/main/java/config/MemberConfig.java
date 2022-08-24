@@ -19,7 +19,7 @@ public class MemberConfig {
         // 1.DataSource 객체 생성
         DataSource ds = new DataSource();
         // 2.JDBC 드라이버 클래스 지정(mysql 사용)
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         // 3.JDBC URL 지정, 데이터베이스와 테이블 캐릭터 셋을 UTF-8로 설정했으므로 파라미터를 이용해 연결 시 사용할 캐릭터셋 지정
         ds.setUrl("jdbc:mysql://localhost/spring5fs?characterEncoding=utf8");
         // 4.DB 연결 시 사용할 계정과 암호 지정
