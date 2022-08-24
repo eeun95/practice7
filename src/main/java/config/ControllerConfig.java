@@ -10,12 +10,12 @@ import spring.MemberRegisterService;
 public class ControllerConfig {
 
     @Autowired
-    private MemberRegisterService memberRegisterSvc;
+    private MemberRegisterService memberRegisterService;
 
     @Bean
     public RegisterController registerController() {
-        RegisterController registerController = new RegisterController();
-        registerController.setMemberRegisterService(memberRegisterSvc);
-        return registerController;
+        RegisterController regController = new RegisterController();
+        regController.setMemberRegisterService(memberRegisterService);
+        return regController;
     }
 }

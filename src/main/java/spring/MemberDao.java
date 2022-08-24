@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Component
 public class MemberDao {
 
     private JdbcTemplate jdbcTemplate;

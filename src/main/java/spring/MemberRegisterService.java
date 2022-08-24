@@ -5,14 +5,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@Component
 public class MemberRegisterService {
 
     @Autowired
     private MemberDao memberDao;
-
-    public MemberRegisterService() {
-    }
 
     public Long regist(RegisterRequest req) {
         Member member = memberDao.selectByEmail(req.getEmail());
