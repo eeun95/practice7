@@ -15,7 +15,7 @@ public class SurveyController {
     @GetMapping
     public String form(Model model) {
         List<Question> questions = createQuestions();
-        model.addAttribute("question", questions);
+        model.addAttribute("questions", questions);
         return "survey/surveyForm";
     }
 
