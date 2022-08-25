@@ -3,6 +3,7 @@ package survey;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,16 @@ public class SurveyController {
         List<Question> questions = createQuestions();
         model.addAttribute("question", questions);
         return "survey/surveyForm";
+    }
+
+    // ModelAndView 를 사용하면 Model을 이용해
+    // 뷰에 전달할 데이터 설정 및 결과를 보여줄 뷰 이름을 리턴할 수 있다
+    public ModelAndView formModelAndView() {
+        List<Question> questions = createQuestions();
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("questions", questions);
+        mav.setViewName("survey/surveyForm");
+        return mav;
     }
 
     private List<Question> createQuestions() {
