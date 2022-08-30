@@ -2,7 +2,10 @@ package config;
 
 // 스프링 부트 사용하긴 하지만 스프링 MVC 구조를 자세히 보기 위해 전부 만들어봄
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
@@ -28,4 +31,14 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/main").setViewName("main");
     }
+
+    // 빈의 아이디를 messageSource로 지정하지 않으면 정상적으로 동작하지 않음
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+        ms.setBasenames("message.label");
+        ms.setDefaultEncoding("UTF-8");
+        return ms;
+    }
+
 }
