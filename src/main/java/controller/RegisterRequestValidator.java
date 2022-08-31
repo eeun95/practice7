@@ -29,8 +29,12 @@ public class RegisterRequestValidator implements Validator {
     // target 파라미터는 검사 대상 객체, errors 파라미터는 검사 결과 에러 코드를 설정하기 위한 객체
     @Override
     public void validate(Object target, Errors errors) {
+        // 전달받은 target을 실제 타입으로 변환한다
         RegisterRequest regReq = (RegisterRequest) target;
+
+        // email 프로퍼티의 값이 유효한지 검사한다
         if (regReq.getEmail() == null || regReq.getEmail().trim().isEmpty()) {
+            // 첫번째는 프로퍼티의 이름을 전달받고, 두번째는 에러코드를 전달받는다
             errors.rejectValue("email", "required");
         } else {
             Matcher matcher = pattern.matcher(regReq.getEmail());
@@ -38,6 +42,10 @@ public class RegisterRequestValidator implements Validator {
                 errors.rejectValue("email", "bad");
             }
         }
+
+        // ValidationUtils 클래스는 객체의 값 검증 코드를 간결하게 작성할 수 있도록 도와준다
+        // errors 객체의 getFieldValue("name") 메서드를 실행해서 커맨드 객체의 name 프로퍼티 값을 구함
+        // 따라서 커맨드 객체를 직접 전달하지 않아도 값 검증을 할 수 있음
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "required");
         ValidationUtils.rejectIfEmpty(errors, "password", "required");
         ValidationUtils.rejectIfEmpty(errors, "confirmPassword", "required");
@@ -46,6 +54,5 @@ public class RegisterRequestValidator implements Validator {
                 errors.rejectValue("confirmPassword", "nomatch");
             }
         }
-
     }
 }
