@@ -9,6 +9,8 @@ import spring.AuthInfo;
 import spring.AuthService;
 import spring.WrongIdPasswordException;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -24,13 +26,16 @@ public class LoginController {
     }
 
     @PostMapping
-    public String submit(LoginCommand loginCommand, Errors errors) {
+    public String submit(LoginCommand loginCommand, Errors errors, HttpSession session) {
         new LoginCommandValidator().validate(loginCommand, errors);
         if (errors.hasErrors()) {
             return "login/loginForm";
         }
         try {
             AuthInfo authInfo = authService.authenticate(loginCommand.getEmail(), loginCommand.getPassword());
+
+            // HttpSession의 authInfo 속성에 인증정보 객체를 저장
+            session.setAttribute("authInfo", authInfo);
             return "login/loginSuccess";
         } catch (WrongIdPasswordException e) {
             errors.reject("idPasswordNotMatching");
