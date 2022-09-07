@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class MemberDao {
@@ -107,5 +108,13 @@ public class MemberDao {
                 "select count(*) from MEMBER", Integer.class
         );
         return count;
+    }
+
+    public List<Member> selectByRegdate(LocalDateTime from, LocalDateTime to) {
+        List<Member> results = jdbcTemplate.query(
+                "select * from MEMBER where REGDATE between ? and ?" + "order by REGDATE desc",
+                new MemberRowMapper(), from, to
+        );
+        return results;
     }
 }
