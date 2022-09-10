@@ -11,9 +11,11 @@
 <body>
     <form:form modelAttribute="cmd">
     <p>
-        <label>form: <form:input path="form" /></label>
+        <label>from: <form:input path="from" /></label>
+        <form:errors path="from" />
         ~
         <label>to: <form:input path="to" /></label>
+        <form:errors path="to" />
         <input type="submit" value="조회">
     </p>
     </form:form>
@@ -29,7 +31,7 @@
         <c:forEach var="mem" items="${members}">
         <tr>
             <td>${mem.id}</td>
-            <td><a href="<c:url value="members/${mem.id}"/ >">${mem.email}</a></td>
+            <td><a href="<c:url value="members/${mem.id}" />">${mem.email}</a></td>
             <td>${mem.email}</td>
             <td><tf:formatDateTime value="${mem.registerDateTime }" pattern="yyyy-MM-dd" /></td>
         </tr>
