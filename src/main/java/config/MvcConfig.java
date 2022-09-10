@@ -2,6 +2,7 @@ package config;
 
 // 스프링 부트 사용하긴 하지만 스프링 MVC 구조를 자세히 보기 위해 전부 만들어봄
 
+import controller.MemberListController;
 import controller.RegisterRequestValidator;
 import interceptor.AuthCheckInterceptor;
 import org.springframework.context.MessageSource;
@@ -62,4 +63,5 @@ public class MvcConfig implements WebMvcConfigurer {
     public AuthCheckInterceptor authCheckInterceptor() {
         return new AuthCheckInterceptor();
     }
+
 }
