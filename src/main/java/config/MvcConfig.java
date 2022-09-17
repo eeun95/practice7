@@ -72,7 +72,6 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     // 모든 날짜 타입을 ISO-8601 형식으로 변환하기 위한 설정
-
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         ObjectMapper objectMapper = Jackson2ObjectMapperBuilder
