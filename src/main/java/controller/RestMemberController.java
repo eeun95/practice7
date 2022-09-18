@@ -1,6 +1,8 @@
 package controller;
 
 import com.fasterxml.classmate.MemberResolver;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.*;
 
@@ -21,16 +23,18 @@ public class RestMemberController {
     }
 
     @GetMapping("/api/members/{id}")
-    public Member member(@PathVariable Long id, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Object> member(@PathVariable Long id, HttpServletResponse response) throws IOException {
         Member member = memberDao.selectById(id);
         if (member == null) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return null;
+            //response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            //return null;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("no member"));
         }
-        return member;
+        return ResponseEntity.status(HttpStatus.OK).body(member);
     }
 
     public void setMemberDao(MemberDao memberDao) {
+
         this.memberDao = memberDao;
     }
 
@@ -49,4 +53,8 @@ public class RestMemberController {
         }
     }
 
+    @ExceptionHandler(MemberNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNoData() {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("no member"));
+    }
 }
