@@ -53,6 +53,15 @@ public class RestMemberController {
         }
     }
 
+    @GetMapping("/api/members/{id}")
+    public Member member(@PathVariable Long id) {
+        Member member = memberDao.selectById(id);
+        if (member == null) {
+            throw new MemberNotFoundException();
+        }
+        return member;
+    }
+
     @ExceptionHandler(MemberNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNoData() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("no member"));
